@@ -1,17 +1,14 @@
-FROM openresty/openresty:alpine
+FROM nginxinc/nginx-unpriviledged:latest
 
 USER root
 
-RUN mkdir -p /var/run/openresty/nginx-client-body && \
-    mkdir -p /var/run/openresty/nginx-proxy && \
-    mkdir -p /var/run/openresty/nginx-fastcgi && \
-    mkdir -p /var/run/openresty/nginx-uwsgi && \
-    mkdir -p /var/run/openresty/nginx-scgi && \
-    chown -R 1001:1001 /var/run/openresty
+RUN apt-get update && apt-get install -y \
+    libnginx-mod-http-lua lua-resty-http && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY nginx.conf /etc/nginx/nginx.conf
-RUN chown -R 1001:1001 /etc/nginx
+RUN chown -R 101:101 /etc/nginx
 
-USER 1001
+USER 101
 
-CMD ["openresty", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
