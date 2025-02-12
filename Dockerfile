@@ -1,9 +1,10 @@
-FROM nginxinc/nginx-unpriviledged:latest
+FROM nginxinc/nginx-unprivileged:latest
 
 USER root
 
-RUN apt-get update && apt-get install -y \
-    libnginx-mod-http-lua lua-resty-http && \
+RUN apt-get update && \
+    apt-get install -y luarocks curl unzip && \
+    luarocks install lua-resty-http && \
     rm -rf /var/lib/apt/lists/*
 
 COPY nginx.conf /etc/nginx/nginx.conf
