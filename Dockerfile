@@ -50,4 +50,4 @@ EXPOSE 8080
 
 USER 1001
 
-CMD ["/usr/local/openresty/bin/nginx/sbin/nginx", "-g", "daemon off;"]
+CMD ["/usr/local/openresty/nginx/sbin/nginx", "-g", "daemon off;"]
