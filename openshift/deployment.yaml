@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cost-mgmt-proxy
+  namespace: costmanagement-metrics-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cost-mgmt-proxy
+  template:
+    metadata:
+      labels:
+        app: cost-mgmt-proxy
+    spec:
+      containers:
+        - name: nginx-proxy
+          image: quay.io/chambrid/cost-mgmt-proxy:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: operator-service-account
+                  key: client_id
+            - name: CLIENT_SECRET
+              valueFrom:
+              secretKeyRef:
+                name: operator-service-account
+                key: client_secret
+                
