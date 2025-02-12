@@ -1,15 +1,14 @@
-FROM nginxinc/nginx-unprivileged:latest
+FROM openresty/openresty:ubi9
 
 USER root
 
-RUN apt-get update && \
-    apt-get install -y luarocks curl unzip && \
-    luarocks install lua-resty-http && \
-    rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /var/run/openresty /user/local/openresty/nginx/client_body_temp \
+    /usr/local/openresty/nginx/proxy_temp /usr/local/openresty/nginx/logs && \
+    chown -R 1001:1001 /var/run/openresty /usr/local/openresty/nginx
 
-COPY nginx.conf /etc/nginx/nginx.conf
-RUN chown -R 101:101 /etc/nginx
+COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
+RUN chown -R 1001:1001 /usr/local/openresty/nginx/conf/nginx.conf
 
-USER 101
+USER 1001
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
