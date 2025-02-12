@@ -40,7 +40,9 @@ RUN curl -fSL https://luarocks.org/releases/luarocks-${LUAROCKS_VERSION}.tar.gz 
 
 RUN /usr/local/openresty/luajit/bin/luarocks install lua-resty-http
 
-RUN mkdir -p /usr/local/openresty/nginx/conf
+RUN mkdir -p /usr/local/openresty/nginx/conf && \
+    mkdir -p /usr/local/openresty/nginx/logs && \
+    mkdir -p /usr/local/openresty/nginx/client_body_temp
 
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 
