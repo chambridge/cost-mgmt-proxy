@@ -26,7 +26,7 @@ spec:
                   key: client_id
             - name: CLIENT_SECRET
               valueFrom:
-              secretKeyRef:
-                name: operator-service-account
-                key: client_secret
+                secretKeyRef:
+                  name: operator-service-account
+                  key: client_secret
                 
