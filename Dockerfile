@@ -43,7 +43,7 @@ RUN /usr/local/openresty/luajit/bin/luarocks install lua-resty-http
 RUN mkdir -p /usr/local/openresty/nginx/conf && \
     mkdir -p /usr/local/openresty/nginx/logs && \
     mkdir -p /usr/local/openresty/nginx/client_body_temp && \
-    mkdir -p /usr/local/openresty/nginx/proxy_temp &&
+    mkdir -p /usr/local/openresty/nginx/proxy_temp && \
     mkdir -p /usr/local/openresty/nginx/fastcgi_temp
 
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
