@@ -44,7 +44,8 @@ RUN mkdir -p /usr/local/openresty/nginx/conf && \
     mkdir -p /usr/local/openresty/nginx/logs && \
     mkdir -p /usr/local/openresty/nginx/client_body_temp && \
     mkdir -p /usr/local/openresty/nginx/proxy_temp && \
-    mkdir -p /usr/local/openresty/nginx/fastcgi_temp
+    mkdir -p /usr/local/openresty/nginx/fastcgi_temp && \
+    mkdir -p /usr/local/openresty/nginx/uwsgi_temp
 
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 
