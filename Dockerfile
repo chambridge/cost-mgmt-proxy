@@ -48,6 +48,12 @@ RUN mkdir -p /usr/local/openresty/nginx/conf && \
     mkdir -p /usr/local/openresty/nginx/uwsgi_temp && \
     mkdir -p /usr/local/openresty/nginx/scgi_temp
 
+RUN chown -R 1001:1001 /usr/local/openresty/nginx/logs && \
+    chmod -R 777 /usr/local/openresty/nginx/logs
+
+RUN ln -sf /dev/stdout /usr/local/openresty/nginx/logs/access.log && \
+    ln -sf /dev/stderr /usr/local/openresty/nginx/logs/error.log
+
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 
 RUN chown -R 1001:1001 /usr/local/openresty
