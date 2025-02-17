@@ -17,7 +17,7 @@ spec:
         - name: nginx-proxy
           image: quay.io/chambrid/cost-mgmt-proxy:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8443
           env:
             - name: CLIENT_ID
               valueFrom:
@@ -29,4 +29,13 @@ spec:
                 secretKeyRef:
                   name: operator-service-account
                   key: client_secret
-                
+            
+          volumeMounts:
+            - name: console-serving-cert
+              readOnly: true
+              mountPath: /var/serving-cert
+      volumes:
+        - name: console-serving-cert
+          secret:
+            secretName: console-serving-cert
+            defaultMode: 420
