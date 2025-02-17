@@ -29,7 +29,6 @@ spec:
                 secretKeyRef:
                   name: operator-service-account
                   key: client_secret
-            
           volumeMounts:
             - name: console-serving-cert
               readOnly: true
